@@ -31,26 +31,17 @@ is the same challenge with a triangle containing one-hundred rows; it cannot be 
 clever method! ;o)
 """
 
-triangle = [75, 95, 64, 17, 47, 82, 18, 35, 87, 10, 20, 4, 82, 47, 65, 19, 1, 23, 75, 3, 34, 88, 2, 77, 73, 7, 63,
-            67, 99, 65, 4, 28, 6, 16, 70, 92, 41, 41, 26, 56, 83, 40, 80, 70, 33, 41, 48, 72, 33, 47, 32, 37, 16, 94,
-            29, 53, 71, 44, 65, 25, 43, 91, 52, 97, 51, 14, 70, 11, 33, 28, 77, 73, 17, 78, 39, 68, 17, 57, 91, 71, 52,
-            38, 17, 14, 91, 43, 58, 50, 27, 29, 48, 63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31, 4, 62, 98,
-            27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23]
+with open("problem18numbers", "r") as f:
+    numbers = [row.replace("\n", "").split() for row in f]
+    numbers = [[int(num) for num in sublist] for sublist in numbers]
 
-current_number = 119  # NUMBER OF NUMBERS - 1
-change = 15  # NUMBER OF ROWS
-number_in_row = 15  # NUMBER OF ROWS
+print(numbers)
 
-for i in range(14):  # NUMBER OF ROWS - 1
-    for j in range(number_in_row - 1):
-        if triangle[current_number] > triangle[current_number - 1]:
-            triangle[current_number - change] += triangle[current_number]
-
+for last_row in range(len(numbers) - 1, 0, -1):
+    for element in range(len(numbers[last_row]) - 1):
+        if numbers[last_row][element] > numbers[last_row][element + 1]:
+            numbers[last_row - 1][element] += numbers[last_row][element]
         else:
-            triangle[current_number - change] += triangle[current_number - 1]
+            numbers[last_row - 1][element] += numbers[last_row][element + 1]
 
-        current_number -= 1
-
-    current_number -= 1
-    number_in_row -= 1
-    change -= 1
+print(numbers[0][0])
