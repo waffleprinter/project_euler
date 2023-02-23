@@ -35,8 +35,6 @@ with open("problem18numbers", "r") as f:
     numbers = [row.replace("\n", "").split() for row in f]
     numbers = [[int(num) for num in sublist] for sublist in numbers]
 
-print(numbers)
-
 for last_row in range(len(numbers) - 1, 0, -1):
     for element in range(len(numbers[last_row]) - 1):
         if numbers[last_row][element] > numbers[last_row][element + 1]:
