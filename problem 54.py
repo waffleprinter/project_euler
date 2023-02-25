@@ -127,5 +127,3 @@ for game in games:
             player_one_wins += 1
 
 print(player_one_wins)
-
-
