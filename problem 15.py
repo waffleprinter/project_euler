@@ -11,7 +11,7 @@ How many such routes are there through a 20×20 grid?
 
 def how_many_paths(x, y):
     if x < y:
-        return "Invalid, input the values so that x > y"
+        return "Invalid, input the values so that x >= y"
 
     number_of_paths = x + 1
     variables = [3]
