@@ -39,7 +39,7 @@ recursive_dict = {}
 target = 100
 total = 0
 
-for k_ in range(target - 1, 0, -1):
+for k_ in range(1, target - 1):
     total += recursive(target, k_)
 
 print(total)
