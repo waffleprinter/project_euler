@@ -1,65 +1,46 @@
-def get_pascals_triangle(rows):
-    triangle = [[0, 1, 0]]
-
-    for row_index in range(1, rows):
-        row = [0]
-        previous_row = triangle[row_index - 1]
-
-        for value_index in range(1, len(previous_row)):
-            row.append(previous_row[value_index - 1] + previous_row[value_index])
-
-        row.append(0)
-
-        triangle.append(row)
-
-    return triangle
+from math import sqrt
 
 
-def get_primes(n):
-    sieve = [True] * n
-    primes = [2]
+def factor(n):
+    if n in factor_dict:
+        return factor_dict[n]
 
-    for i in range(4, n, 2):
-        sieve[i] = False
+    for d in range(2, int(sqrt(n)) + 1):
+        if n % d == 0:
+            factor_dict[n] = factor(n // d) + factor(d)
+            return factor_dict[n]
 
-    for p in range(3, n, 2):
-        if sieve[p]:
-            primes.append(p)
-
-            for i in range(p ** 2, n, p):
-                sieve[i] = False
-
-    return primes
+    factor_dict[n] = [n]
+    return [n]
 
 
-def is_square_free(n):
-    for squared_prime in squared_primes:
-        if n % squared_prime == 0:
-            return False
+def factorial(n):
+    ans = 1
 
-        if squared_prime >= n:
-            break
+    for i in range(2, n + 1):
+        ans *= i
 
-    return True
+    return ans
 
 
-primes = get_primes(11243247)
-squared_primes = list(map(lambda x: x ** 2, primes))
-
-pascals_triangle = get_pascals_triangle(51)
-pascals_values = set()
-
-for row in pascals_triangle:
-    for value in row[1:-1]:
-        pascals_values.add(value)
-
-square_free_values = set()
-
-for value in pascals_values:
-    if is_square_free(value):
-        square_free_values.add(value)
-
-print(sum(square_free_values))
+def choose(n, k):
+    return factorial(n) // factorial(k) // factorial(n - k)
 
 
+def is_squarefree(n):
+    factors = factor(n)
 
+    return len(set(factors)) == len(factors)
+
+
+factor_dict = {}
+squarefree_set = set()
+
+for n in range(51):
+    for k in range(n // 2 + 1):
+        value = choose(n, k)
+
+        if is_squarefree(value):
+            squarefree_set.add(value)
+
+print(sum(squarefree_set))
