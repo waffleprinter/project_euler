@@ -26,5 +26,6 @@ def P(m):
 #P(13*12345 * 13*12345-1) = 17/(13*12345) so a[-1} >= 12345*17
 # that EQUALS, we need SMALLER
 # so plus one
+
 print(P(209867 * 209866))
 
