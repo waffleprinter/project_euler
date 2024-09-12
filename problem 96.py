@@ -54,7 +54,3 @@ for grid in grids:
     ans += int(str(grid[0][0]) + str(grid[0][1]) + str(grid[0][2]))
 
 print(ans)
-
-
-
-
